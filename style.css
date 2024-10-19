@@ -1,0 +1,32 @@
+#content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grass{
+    background-color: rgb(55, 143, 55);
+}
+
+.fire{
+    background-color: rgb(220, 98, 6);
+}
+
+.water{
+    background-color: rgb(10, 126, 184);
+}
+
+#imgContainer{
+    width:auto;
+    height: 200px;
+}
+
+.card img{
+    width: 140px;
+    height: auto;
+    filter: drop-shadow(3px 3px 3px rgb(40, 39, 39));
+
+}
+
+.card img:hover{
+    filter: drop-shadow(5px 5px 5px rgb(58, 57, 57));
+}
