@@ -3,6 +3,10 @@
     flex-wrap: wrap;
 }
 
+#imgContainer{
+    display: flex;
+}
+
 .grass{
     background-color: rgb(55, 143, 55);
 }
@@ -29,4 +33,39 @@
 
 .card img:hover{
     filter: drop-shadow(5px 5px 5px rgb(58, 57, 57));
+}
+
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.36);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cardBig{
+    width: 350px;
+    height: 250px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+}
+
+#info{
+    display: flex;
+    justify-content: space-between;
+}
+
+#stats{
+    width: 35%;
+}
+
+#d-none{
+    display: none; 
 }
