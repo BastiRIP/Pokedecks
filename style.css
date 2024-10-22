@@ -57,13 +57,35 @@
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
 }
 
+.bigCardImg{
+    width: 150px;
+    height: auto;
+}
+
+.progress-container {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+
+}
+
+.progress-container span {
+    width: 100px; /* Größe der Beschriftung */
+    margin-right: 10px; /* Abstand zur Progressbar */
+    font-size: 12px;
+}
+
+.progress{
+    flex-grow: 1;
+    height: 20px;
+}
+
 #info{
     display: flex;
-    justify-content: space-between;
 }
 
 #stats{
-    width: 35%;
+    width: 100%;
 }
 
 #d-none{
