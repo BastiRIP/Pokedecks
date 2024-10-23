@@ -9,19 +9,6 @@ function init(){
     getNames();
 }
 
-async function getNames() {
-    let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
-    let names = await namesResponse.results;
-
-    for (let i = 0; i < names.length; i++) {
-        const element = names[i];
-        let pokeData = await fetchPokeData(element.url)
-        allPokemon.push(pokeData);
-        
-        document.getElementById('content').innerHTML += card(pokeData, i); 
-    }
-  }
-
 async function fetchPokeData(url){
     let response = await fetch(url);
     return await response.json();
@@ -31,6 +18,23 @@ async function fetchData(path = ""){
     let response = await fetch(DB_URL + path);
     return await response.json();
   }
+
+async function getNames() {
+    let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
+    let names = await namesResponse.results;
+
+    for (let i = 0; i < names.length; i++) {
+        const element = names[i];
+        let pokeData = await fetchPokeData(element.url)
+        pokeData.name = capitalizeFirstLetter(pokeData.name);
+        allPokemon.push(pokeData);
+        document.getElementById('content').innerHTML += card(pokeData, i);
+    }
+  }
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function card(pokemon, index){
     return getCardTemplate(pokemon, index);
@@ -55,4 +59,10 @@ function bigCardImg(index) {
     document.getElementById('bigCardImg').innerHTML = `
         <img class="bigCardImg" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
     `;
+}
+
+function loadMorePokemon(){
+    limit = limit + 20;
+    document.getElementById('content').innerHTML = '';
+    init();
 }
