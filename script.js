@@ -1,8 +1,9 @@
 let DB_URL = "https://pokeapi.co/api/v2/";
 let allPokemon = [];
+let allPokemonNames = [];
 
 let offset = 0;
-let limit = 20;
+let limit = 10;
 
 function init(){
     fetchData();
@@ -32,20 +33,20 @@ async function fetchData(path = ""){
 //     }
 //   }
 
-async function getNames(searchTerm = "") {
+async function getNames(filter = "") {
     let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
     let names = await namesResponse.results;
-    allPokemon = []; // Leere das Array, um doppelte Einträge zu vermeiden
-    document.getElementById('content').innerHTML = ''; // Inhalt des Containers leeren
+    allPokemon = [];
+    document.getElementById('content').innerHTML = '';
+    allPokemonNames.push(names);
 
     for (let i = 0; i < names.length; i++) {
         const element = names[i];
         let pokeData = await fetchPokeData(element.url);
         pokeData.name = capitalizeFirstLetter(pokeData.name);
         allPokemon.push(pokeData);
-
-        // Wenn ein Suchbegriff vorhanden ist, nur passende Pokémon anzeigen
-        if (searchTerm === "" || pokeData.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+      
+        if (filter === "" || pokeData.name.toLowerCase().includes(filter.toLowerCase())) {
             document.getElementById('content').innerHTML += card(pokeData, i);
         }
     }
@@ -53,10 +54,10 @@ async function getNames(searchTerm = "") {
 
 // Diese Funktion wird aufgerufen, wenn sich das Suchfeld ändert
 function searchPokemon() {
-    let searchTerm = document.getElementById('search').value;
-    if (searchTerm.length >= 3) {
-        getNames(searchTerm); // Namen mit Suchbegriff filtern
-    } else {
+    let filter = document.getElementById('search').value;
+    if (filter.length >= 3) {
+        getNames(filter); // Namen mit Suchbegriff filtern
+    } else if (filter.length === 0){
         getNames(); // Alle Namen anzeigen, wenn weniger als 3 Zeichen eingegeben wurden
     }
 }
@@ -72,8 +73,9 @@ function card(pokemon, index){
 function openOverlay(index){
     let overlay = document.getElementById('overlay');
     if (overlay.classList.contains('d-none')) {
-        renderStats(index);
+        // renderStats(index);
         bigCardImg(index);
+        showStatsTab(index);
     }
     overlay.classList.toggle('d-none');
 }
@@ -94,4 +96,9 @@ function loadMorePokemon(){
     limit = limit + 20;
     document.getElementById('content').innerHTML = '';
     init();
+}
+
+function showStatsTab(index){
+    let pokemon = allPokemon[index];
+    document.getElementById('nav-home').innerHTML = statsTab(pokemon);
 }

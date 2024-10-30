@@ -17,16 +17,60 @@ body{
     display: flex;
 }
 
+.edge {
+    background-color: rgb(236, 222, 222);
+}
+
 .grass{
-    background-color: rgb(55, 143, 55);
+    background-color: #81C784;
 }
 
 .fire{
-    background-color: rgb(220, 98, 6);
+    background-color: #FF7F5E;
 }
 
 .water{
-    background-color: rgb(10, 126, 184);
+    background-color: #64B3FF;
+}
+
+.bug{
+    background-color: #B0C04E;
+}
+
+.normal{
+    background-color: #F66C6D;
+}
+
+.poison{
+    background-color: #A065FC;
+}
+
+.electric{
+    background-color: #FFD700;
+}
+
+.ground{
+    background-color: #C2A18C;
+}
+
+.fairy{
+    background-color: #FFC8C8;
+}
+
+.fighting{
+    background-color: #C74040;
+}
+
+.psychic{
+    background-color: #F48FB3;
+}
+
+.rock{
+    background-color: #8C8B8A;
+}
+
+.ghost{
+    background-color: #8180BE;
 }
 
 #imgContainer{
@@ -58,8 +102,8 @@ body{
 }
 
 #cardBig{
-    width: 350px;
-    height: 250px;
+    width: 500px;
+    height: 500px;
     background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -97,7 +141,7 @@ body{
 
 #info{
     height: 100%;
-    display: flex;
+    display: block;
 }
 
 #stats{

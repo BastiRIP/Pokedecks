@@ -59,3 +59,34 @@ function getStatsTemplate(pokemon){
                 </div>
             </div>`
 }
+
+function statsTab(pokemon){ 
+        return `
+           <div class="progress-container">
+                <span>Base-HP:</span>
+                <div class="progress mt-3" role="progressbar" aria-valuenow="${pokemon.stats[0].base_stat}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: ${pokemon.stats[0].base_stat}%;"></div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <span>Attack:</span>
+                <div class="progress mt-3" role="progressbar" aria-valuenow="${pokemon.stats[1].base_stat}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: ${pokemon.stats[1].base_stat}%;"></div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <span>Defense:</span>
+                <div class="progress mt-3" role="progressbar" aria-valuenow="${pokemon.stats[2].base_stat}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: ${pokemon.stats[2].base_stat}%;"></div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <span>Special Attack:</span>
+                <div class="progress mt-3" role="progressbar" aria-valuenow="${pokemon.stats[3].base_stat}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: ${pokemon.stats[3].base_stat}%;"></div>
+                </div>
+            </div> `
+}
