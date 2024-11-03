@@ -30,41 +30,32 @@
         </header>
         <div id="content"></div>
         <div id="overlay" class="overlay d-none" onclick="openOverlay()">
-            <div id="cardBig">
-                <div id="info" onclick="event.stopPropagation()">
-                    <div id="bigCardImg">Test</div>
-                    <div id="stats"></div>
+            <div id="cardBig" onclick="event.stopPropagation()">
+                    <div class="pb-2" id="bigCardImg"></div>
                         <div id="test">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                  <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                                  <a class="nav-link active" id="nav-stats-tab" data-bs-toggle="tab" href="#nav-stats" role="tab" aria-controls="nav-stats" aria-selected="true">Stats</a>
                                   <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
                                   <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
                                 </div>
-                              </nav>
-                              <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                  <p>clicked home</p>
-                                <p>clicked home</p>
-                              <p>clicked home</p>
-                                </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                  <p>clicked profile</p>
-                                  <p>clicked profile</p>
-                                  <p>clicked profile</p>
-                                </div>
-                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                  <p>clicked contact</p>
-                                  <p>clicked contact</p>
-                                  <p>clicked contact</p>
-                                </div>
+                            </nav>
+                              <div class="tab-content m-4" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab"></div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"></div>
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"></div>
                               </div> 
                         </div>
-                </div>
+                        <div id="navigation">
+                            <button onclick="nextPokemon()">vor</button>
+                            <button onclick="prevPokemon()">zurück</button>
+                        </div>
+                    </div>
+                <!-- </div> -->
             </div>
         </div>
         <footer id="footer">
-            <div class="d-grid gap-2 col-6 mx-auto pb-4">
+            <div class="d-grid gap-2 col-6 mx-auto pb-3">
                 <button class="btn btn-primary" type="button" onclick="loadMorePokemon()">load more Pokémon</button>
               </div>
         </footer>
