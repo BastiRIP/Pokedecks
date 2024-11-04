@@ -157,3 +157,6 @@ function calculatePokemonHight(pokemon){
     return height;
 }
 
+function testfunktion(){
+    das ist nur ein Test
+}
