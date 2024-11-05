@@ -172,14 +172,36 @@ body{
 }
 
 .spinner-wrapper{
-    background-color: black;
+    background-color: rgba(244, 243, 243, 0.908);
     height: 100%;
     width: 100%;
     position: fixed;
-    top: 0;
+    top: 15px;
     left: 0;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
+
+.spinner-wrapper p{
+    font-size: 54px;
+    color: #dc3910;
+    font-weight: 600;
+    text-shadow: 3px 3px 11px black;
+}
+
+#spinnerImg {
+    animation: spin 1s infinite linear;
+    filter: drop-shadow(0px 0px 18px rgb(40, 39, 39));
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

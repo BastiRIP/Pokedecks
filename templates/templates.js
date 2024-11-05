@@ -1,5 +1,5 @@
 function getCardTemplate(pokemon, index){
-    return  `<div class="card m-4" style="width: 18rem; --bs-card-border-width:none;" onclick="openOverlay(${index})" id="pokemon_${index}>
+    return  `<div class="card m-4 text-center h4" style="width: 18rem; --bs-card-border-width:none;" onclick="openOverlay(${index})" id="pokemon_${index}>
                 <h4 class="card-title text-center">${pokemon.name}</h4>
                 <div id="imgContainer" class="${pokemon.types[0].type.name}">           
                     <img src="${pokemon.sprites.other.dream_world.front_default}" class="card-img-top mx-auto pt-2" alt="...">

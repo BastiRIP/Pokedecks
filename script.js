@@ -21,17 +21,8 @@ async function fetchData(path = ""){
     return await response.json();
   }
 
-//   async function fetchEvolution(currentIndex){
-//     let url = allPokemon[currentIndex].species.url;
-//     console.log(url);
-//     let evolution = await fetch(url);
-//     return await evolution.json(); 
-//   }
-
-
-  async function fetchEvolution(currentIndex) {
+async function fetchEvolution(currentIndex) {
     let url = allPokemon[currentIndex].species.url;
-    
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -43,18 +34,14 @@ async function fetchData(path = ""){
       fetchEvolutionChain(json);
     } catch (error) {
       console.error(error.message);
-    }
-   
-  }
+    }   
+}
 
-  async function fetchEvolutionChain(json){
+async function fetchEvolutionChain(json){
     let url = json.evolution_chain.url;
     console.log(url);
     
-  }
-
-
-
+}
 
 async function getNames(filter = "") {
     let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
@@ -72,6 +59,7 @@ async function getNames(filter = "") {
             document.getElementById('content').innerHTML += card(pokeData, i);
         }
     }
+    setTimeout(() => document.getElementById('spinnerContainer').classList.add('d-none'), 2000);
 }
 
 function searchPokemon() {
