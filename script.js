@@ -156,7 +156,3 @@ function calculatePokemonHight(pokemon){
     let height = (pokemon.height / 10).toFixed(2);
     return height;
 }
-
-function testfunktion(){
-    das ist nur ein Test
-}
