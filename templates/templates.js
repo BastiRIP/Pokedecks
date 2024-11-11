@@ -64,3 +64,8 @@ function abilitiesTab(pokemon){
                 </tbody>
             </table>`
 }
+
+function evolutionChainTab(evolutionDataArr, i){
+    return `<div class="evoPic"><img src="${evolutionDataArr[i].imageUrl}" alt="pokemonImg"></div>
+`;
+}

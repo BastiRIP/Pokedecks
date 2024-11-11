@@ -78,11 +78,14 @@ body{
     height: 200px;
 }
 
+.card{
+    cursor: pointer;
+}
+
 .card img{
     width: 140px;
     height: auto;
     filter: drop-shadow(3px 3px 3px rgb(40, 39, 39));
-
 }
 
 .card img:hover{
@@ -127,7 +130,7 @@ body{
 }
 
 .bigCardImg{
-    width: 220px;
+    height: 250px;
 }
 
 #test{
@@ -195,6 +198,7 @@ body{
 #spinnerImg {
     animation: spin 1s infinite linear;
     filter: drop-shadow(0px 0px 18px rgb(40, 39, 39));
+    height: 270px;
   }
   
   @keyframes spin {
@@ -205,3 +209,21 @@ body{
       transform: rotate(360deg);
     }
   }
+
+.navArrow{
+    width: 50px;
+    cursor: pointer;
+}
+
+.navArrow:hover{
+    filter: drop-shadow(3px 3px 3px rgb(40, 39, 39));
+    transform: scale(1.07);
+}
+
+#nav-contact{
+    display: flex;
+}
+
+.evoPic img{
+    width: 100px;
+}

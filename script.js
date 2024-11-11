@@ -2,6 +2,7 @@ let DB_URL = "https://pokeapi.co/api/v2/";
 let allPokemon = [];
 let currentIndex=[];
 let species = [];
+let evolutionDataArr = [];
 
 let offset = 0;
 let limit = 20;
@@ -21,27 +22,56 @@ async function fetchData(path = ""){
     return await response.json();
   }
 
+// async function fetchEvolution(currentIndex) {
+//     let url = allPokemon[currentIndex].species.url;
+//     try {
+//       const response = await fetch(url);
+//       if (!response.ok) {
+//         throw new Error(`Response status: ${response.status}`);
+//       }
+  
+//       const json = await response.json();
+//     //   console.log(json);
+//       fetchEvolutionChain(json);
+//     } catch (error) {
+//       console.error(error.message);
+//     }   
+// }
+
 async function fetchEvolution(currentIndex) {
     let url = allPokemon[currentIndex].species.url;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const json = await response.json();
-      console.log(json);
-      fetchEvolutionChain(json);
-    } catch (error) {
-      console.error(error.message);
-    }   
+    const response = await fetch(url);
+    const json = await response.json();
+    
+    fetchEvolutionChain(json);     
 }
 
 async function fetchEvolutionChain(json){
     let url = json.evolution_chain.url;
-    console.log(url);
-    
+    getEvolutionData(url);
 }
+
+async function getEvolutionData(url){
+    let response = await fetch(url);
+    let data = await response.json();
+    let chain = data.chain;
+    // console.log(chain);
+    const evolutionDataArr = [];
+        
+        function extractEvolutionDetails(chainLink) {
+            const pokemonName = chainLink.species.name;
+            const pokemonId = chainLink.species.url.split('/').slice(-2, -1)[0];
+            const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
+          
+            evolutionDataArr.push({ name: pokemonName, imageUrl: pokemonImageUrl });
+            chainLink.evolves_to.forEach(nextEvolution => extractEvolutionDetails(nextEvolution));
+        }
+        extractEvolutionDetails(chain);
+            // const pokemonEvolution = evolutionDataArr[i];
+            showEvolutionChainTab(evolutionDataArr);     
+    console.log(evolutionDataArr);
+}
+
 
 async function getNames(filter = "") {
     let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
@@ -59,7 +89,7 @@ async function getNames(filter = "") {
             document.getElementById('content').innerHTML += card(pokeData, i);
         }
     }
-    setTimeout(() => document.getElementById('spinnerContainer').classList.add('d-none'), 2000);
+    setTimeout(() => document.getElementById('spinnerContainer').classList.add('d-none'), 1000);
 }
 
 function searchPokemon() {
@@ -83,8 +113,6 @@ function openOverlay(index){
     currentIndex = index;
     let overlay = document.getElementById('overlay');
     if (overlay.classList.contains('d-none')) {
-        // bigCardImg(index);
-        // showStatsTab(index);
         renderPokemon();
     }
     overlay.classList.toggle('d-none');
@@ -100,7 +128,7 @@ function renderPokemon(){
 
 function renderStats(index){
     let pokemon = allPokemon[index];
-    document.getElementById('stats').innerHTML = getStatsTemplate(pokemon);
+    document.getElementById('stats').innerHTML = getStatsTemplate();
 }
 
 function bigCardImg(index) {
@@ -126,6 +154,13 @@ function showAbilitiesTab(index){
     document.getElementById('nav-profile').innerHTML = abilitiesTab(pokemon);
 }
 
+function showEvolutionChainTab(evolutionDataArr, i){
+    document.getElementById('nav-contact').innerHTML = '';
+    for (let i = 0; i < evolutionDataArr.length; i++) {
+        document.getElementById('nav-contact').innerHTML += evolutionChainTab(evolutionDataArr, i);   
+    }    
+}
+
 function nextPokemon(){
     if (currentIndex < allPokemon.length - 1){
         currentIndex++;
@@ -144,3 +179,7 @@ function calculatePokemonHight(pokemon){
     let height = (pokemon.height / 10).toFixed(2);
     return height;
 }
+
+// function clearEvo(){
+//     document.getElementById('nav-contact').innerHTML = '';
+// }
