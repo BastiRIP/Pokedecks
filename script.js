@@ -7,90 +7,78 @@ let evolutionDataArr = [];
 let offset = 0;
 let limit = 20;
 
-function init(){
-    fetchData();
-    getNames();
-}
+// function init(){
+//     fetchData();
+//     getNames();
+// }
 
-async function fetchPokeData(url){
-    let response = await fetch(url);
-    return await response.json();
-}
+// async function fetchPokeData(url){
+//     let response = await fetch(url);
+//     return await response.json();
+// }
 
-async function fetchData(path = ""){
-    let response = await fetch(DB_URL + path);
-    return await response.json();
-  }
+// async function fetchData(path = ""){
+//     let response = await fetch(DB_URL + path);
+//     return await response.json();
+//   }
 
 // async function fetchEvolution(currentIndex) {
 //     let url = allPokemon[currentIndex].species.url;
-//     try {
-//       const response = await fetch(url);
-//       if (!response.ok) {
-//         throw new Error(`Response status: ${response.status}`);
-//       }
-  
-//       const json = await response.json();
-//     //   console.log(json);
-//       fetchEvolutionChain(json);
-//     } catch (error) {
-//       console.error(error.message);
-//     }   
+//     const response = await fetch(url);
+//     const json = await response.json();
+    
+//     fetchEvolutionChain(json);     
 // }
 
-async function fetchEvolution(currentIndex) {
-    let url = allPokemon[currentIndex].species.url;
-    const response = await fetch(url);
-    const json = await response.json();
-    
-    fetchEvolutionChain(json);     
-}
+// async function fetchEvolutionChain(json){
+//     let url = json.evolution_chain.url;
+//     getEvolutionData(url);
+// }
 
-async function fetchEvolutionChain(json){
-    let url = json.evolution_chain.url;
-    getEvolutionData(url);
-}
-
-async function getEvolutionData(url){
-    let response = await fetch(url);
-    let data = await response.json();
-    let chain = data.chain;
-    // console.log(chain);
-    const evolutionDataArr = [];
+// async function getEvolutionData(url){
+//     let response = await fetch(url);
+//     let data = await response.json();
+//     let chain = data.chain;
+//     // console.log(chain);
+//     const evolutionDataArr = [];
         
-        function extractEvolutionDetails(chainLink) {
-            const pokemonName = chainLink.species.name;
-            const pokemonId = chainLink.species.url.split('/').slice(-2, -1)[0];
-            const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
+//         function extractEvolutionDetails(chainLink) {
+//             const pokemonName = chainLink.species.name;
+//             const pokemonId = chainLink.species.url.split('/').slice(-2, -1)[0];
+//             const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
           
-            evolutionDataArr.push({ name: pokemonName, imageUrl: pokemonImageUrl });
-            chainLink.evolves_to.forEach(nextEvolution => extractEvolutionDetails(nextEvolution));
-        }
-        extractEvolutionDetails(chain);
-            // const pokemonEvolution = evolutionDataArr[i];
-            showEvolutionChainTab(evolutionDataArr);     
-    console.log(evolutionDataArr);
-}
+//             evolutionDataArr.push({ name: pokemonName, imageUrl: pokemonImageUrl });
+//             chainLink.evolves_to.forEach(nextEvolution => extractEvolutionDetails(nextEvolution));
+//         }
+//         extractEvolutionDetails(chain);
+//             // const pokemonEvolution = evolutionDataArr[i];
+//             showEvolutionChainTab(evolutionDataArr);     
+//     console.log(evolutionDataArr);
+// }
 
 
-async function getNames(filter = "") {
-    let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
-    let names = await namesResponse.results;
-    allPokemon = [];
-    document.getElementById('content').innerHTML = '';
+// async function getNames(filter = "") {
+//     let namesResponse = await fetchData(`/pokemon/?offset=${offset}&limit=${limit}`);
+//     let names = await namesResponse.results;
+//     allPokemon = [];
+//     document.getElementById('content').innerHTML = '';
 
-    for (let i = 0; i < names.length; i++) {
-        const element = names[i];
-        let pokeData = await fetchPokeData(element.url);
-        pokeData.name = capitalizeFirstLetter(pokeData.name);
-        allPokemon.push(pokeData);
+//     for (let i = 0; i < names.length; i++) {
+//         const element = names[i];
+//         let pokeData = await fetchPokeData(element.url);
+//         pokeData.name = capitalizeFirstLetter(pokeData.name);
+//         allPokemon.push(pokeData);
       
-        if (filter === "" || pokeData.name.toLowerCase().includes(filter.toLowerCase())) {
-            document.getElementById('content').innerHTML += card(pokeData, i);
-        }
-    }
-    setTimeout(() => document.getElementById('spinnerContainer').classList.add('d-none'), 1000);
-}
+//         if (filter === "" || pokeData.name.toLowerCase().includes(filter.toLowerCase())) {
+//             document.getElementById('content').innerHTML += card(pokeData, i);
+//         }
+//     }
+//     setTimeout(() => document.getElementById('spinnerContainer').classList.add('d-none'), 1000);
+// }
+
+
+
+
 
 function searchPokemon() {
     let searchWord = document.getElementById('search').value;
@@ -100,10 +88,11 @@ function searchPokemon() {
         getNames();
     }
 }
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+//////////////////// wird nicht mehr benötigt /////////////////////////
+// function capitalizeFirstLetter(string) {
+//     return string.charAt(0).toUpperCase() + string.slice(1);
+// }
+///////////////////////////////////////////////////////////////////////
 
 function card(pokemon, index){
     return getCardTemplate(pokemon, index);
@@ -144,6 +133,11 @@ function loadMorePokemon(){
     init();
 }
 
+function showAboutTab(index){
+    let pokemon = allPokemon[index];
+    document.getElementById('about-stats').innerHTML = aboutTab(pokemon);
+}
+
 function showStatsTab(index){
     let pokemon = allPokemon[index];
     document.getElementById('nav-stats').innerHTML = statsTab(pokemon);
@@ -179,7 +173,3 @@ function calculatePokemonHight(pokemon){
     let height = (pokemon.height / 10).toFixed(2);
     return height;
 }
-
-// function clearEvo(){
-//     document.getElementById('nav-contact').innerHTML = '';
-// }

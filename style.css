@@ -1,3 +1,10 @@
+
+.faculty-glyphic-regular {
+    font-family: "Faculty Glyphic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
 html{
     max-width: 1920px;
     font-family: 'Roboto';
@@ -71,25 +78,6 @@ body{
 
 .ghost{
     background-color: #8180BE;
-}
-
-#imgContainer{
-    width:auto;
-    height: 200px;
-}
-
-.card{
-    cursor: pointer;
-}
-
-.card img{
-    width: 140px;
-    height: auto;
-    filter: drop-shadow(3px 3px 3px rgb(40, 39, 39));
-}
-
-.card img:hover{
-    filter: drop-shadow(5px 5px 5px rgb(58, 57, 57));
 }
 
 .overlay{

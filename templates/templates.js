@@ -1,12 +1,21 @@
-function getCardTemplate(pokemon, index){
-    return  `<div class="card m-4 text-center h4" style="width: 18rem; --bs-card-border-width:none;" onclick="openOverlay(${index})" id="pokemon_${index}>
-                <h4 class="card-title text-center">${pokemon.name}</h4>
-                <div id="imgContainer" class="${pokemon.types[0].type.name}">           
-                    <img src="${pokemon.sprites.other.dream_world.front_default}" class="card-img-top mx-auto pt-2" alt="...">
+function overviewTemplate(pokeIndex){
+    let firstType = allPokemon[pokeIndex].type[0];
+    let secType = allPokemon[pokeIndex].type[1];
+    return  `<div class="card m-4" onclick="getEvolutionData(${pokeIndex})" id="pokemon_${pokeIndex}">
+                <div class="cardHeader text-capitalize p-2">${allPokemon[pokeIndex].Name}</div>
+                <div id="imgContainer" class="${firstType}">           
+                    <img src="${allPokemon[pokeIndex].Img}" class="cardPokeImg mx-auto" alt="${allPokemon[pokeIndex].Name}">
                 </div>
-                <div class="card-body">
-                    
-                </div>
+                <div class="cardFooter p-4">
+                    <div class="typeContainer">
+                        <div class="text-capitalize" id="firstType">${firstType}</div>
+                        <img class="typeImg"  src="img/typesImg/${firstType}.png" alt="${firstType}">
+                    </div>
+                    ${secType ? `
+                        <div class="typeContainer">
+                            <div class="text-capitalize" id="secType">${secType}</div>
+                            <img class="typeImg" src="img/typesImg/${secType}.png" alt="${secType}">
+                        </div>` : ''}
             </div>`
 }
 
@@ -63,6 +72,12 @@ function abilitiesTab(pokemon){
                 </tr>
                 </tbody>
             </table>`
+}
+
+function aboutTab(pokemon){
+    return `
+    <p>Spezies:</p>${pokemon.species}`;
+
 }
 
 function evolutionChainTab(evolutionDataArr, i){
