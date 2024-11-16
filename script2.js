@@ -4,12 +4,13 @@ let offset = 0;
 let limit = 20;
 
 
-function init(){
-    loadAllPokemon();
+async function init(){
+    await loadAllPokemon();
+
 }
 
 
-async function loadAllPokemon(){
+async function loadAllPokemon(filter = ""){
     try {
         let response = await fetch(DB_URL + `/pokemon/?offset=${offset}&limit=${limit}`);
         let responseAsJson = await response.json();
@@ -50,7 +51,6 @@ async function getEvolutionData(pokeIndex){
         let response = await fetch(allPokemon[pokeIndex].url);
         let responseEvolution = await response.json(); 
         console.log(responseEvolution);
-        
     }
     catch (error) {
         console.error("irgendwas mit der Evolution klappt nicht")
@@ -72,4 +72,51 @@ function renderPokemonsOverview(){
     }
 }
 
+function loadMorePokemon(){
+    limit = limit + 10;
+    allPokemon = [];
+    document.getElementById('content').innerHTML = '';
+    init();
+}
+
+function searchPokemon() {
+    let searchWord = document.getElementById('search').value.toLowerCase();
+    if (searchWord === "") {
+        renderPokemonsOverview();
+        return;
+    }
+
+    if (searchWord.length > 2) {
+        let searchedPoke = allPokemon.filter(poke => poke.Name && poke.Name.toLowerCase().includes(searchWord));
+        viewSearchedPokemon(searchedPoke);
+    } else {}   
+}
+
+function viewSearchedPokemon(searchedPoke) {
+    let content = document.getElementById('content');
+    content.innerHTML = '';
+    for (let poke of searchedPoke) {
+        content.innerHTML += overviewTemplate(poke.ID-1);
+    }
+}
+
+function openOverlay(pokeIndex){
+    currentIndex = pokeIndex;
+    let overlay = document.getElementById('overlay');
+    if (overlay.classList.contains('d-none')) {
+        renderPokemonDetailCard(pokeIndex);
+    }
+    overlay.classList.toggle('d-none');
+}
+
+function renderPokemonDetailCard(pokeIndex){
+    bigCardImg(pokeIndex);
+}
+
+function bigCardImg(index) {
+    let pokemon = allPokemon[index];
+    document.getElementById('bigCardImg').innerHTML = `
+        <img class="bigCardImg" src="${pokemon.Img}" alt="${pokemon.name}">
+    `;
+}
 

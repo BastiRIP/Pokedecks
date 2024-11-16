@@ -80,14 +80,8 @@ let limit = 20;
 
 
 
-function searchPokemon() {
-    let searchWord = document.getElementById('search').value;
-    if (searchWord.length >= 3) {
-        getNames(searchWord);
-    } else if (searchWord.length === 0){
-        getNames();
-    }
-}
+
+
 //////////////////// wird nicht mehr benötigt /////////////////////////
 // function capitalizeFirstLetter(string) {
 //     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -98,14 +92,14 @@ function card(pokemon, index){
     return getCardTemplate(pokemon, index);
 }
 
-function openOverlay(index){
-    currentIndex = index;
-    let overlay = document.getElementById('overlay');
-    if (overlay.classList.contains('d-none')) {
-        renderPokemon();
-    }
-    overlay.classList.toggle('d-none');
-}
+// function openOverlay(index){
+//     currentIndex = index;
+//     let overlay = document.getElementById('overlay');
+//     if (overlay.classList.contains('d-none')) {
+//         renderPokemon();
+//     }
+//     overlay.classList.toggle('d-none');
+// }
 
 function renderPokemon(){
     bigCardImg(currentIndex);
@@ -127,11 +121,6 @@ function bigCardImg(index) {
     `;
 }
 
-function loadMorePokemon(){
-    limit = limit + 10;
-    document.getElementById('content').innerHTML = '';
-    init();
-}
 
 function showAboutTab(index){
     let pokemon = allPokemon[index];

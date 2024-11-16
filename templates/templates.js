@@ -4,7 +4,7 @@ function overviewTemplate(pokeIndex){
     return  `<div class="card m-4" onclick="getEvolutionData(${pokeIndex})" id="pokemon_${pokeIndex}">
                 <div class="cardHeader text-capitalize p-2">${allPokemon[pokeIndex].Name}</div>
                 <div id="imgContainer" class="${firstType}">           
-                    <img src="${allPokemon[pokeIndex].Img}" class="cardPokeImg mx-auto" alt="${allPokemon[pokeIndex].Name}">
+                    <img src="${allPokemon[pokeIndex].Img}" class="cardPokeImg mx-auto" alt="${allPokemon[pokeIndex].Name}" onclick="openOverlay(${pokeIndex})">
                 </div>
                 <div class="cardFooter p-4">
                     <div class="typeContainer">
