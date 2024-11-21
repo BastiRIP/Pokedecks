@@ -109,33 +109,33 @@ function renderPokemon(){
     fetchEvolution(currentIndex);
 }
 
-function renderStats(index){
-    let pokemon = allPokemon[index];
-    document.getElementById('stats').innerHTML = getStatsTemplate();
-}
+// function renderStats(index){
+//     let pokemon = allPokemon[index];
+//     document.getElementById('stats').innerHTML = getStatsTemplate();
+// }
 
-function bigCardImg(index) {
-    let pokemon = allPokemon[index];
-    document.getElementById('bigCardImg').innerHTML = `
-        <img class="bigCardImg" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
-    `;
-}
+// function bigCardImg(index) {
+//     let pokemon = allPokemon[index];
+//     document.getElementById('bigCardImg').innerHTML = `
+//         <img class="bigCardImg" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
+//     `;
+// }
 
 
-function showAboutTab(index){
-    let pokemon = allPokemon[index];
-    document.getElementById('about-stats').innerHTML = aboutTab(pokemon);
-}
+// function showAboutTab(index){
+//     let pokemon = allPokemon[index];
+//     document.getElementById('about-stats').innerHTML = aboutTab(pokemon);
+// }
 
-function showStatsTab(index){
-    let pokemon = allPokemon[index];
-    document.getElementById('nav-stats').innerHTML = statsTab(pokemon);
-}
+// function showStatsTab(index){
+//     let pokemon = allPokemon[index];
+//     document.getElementById('nav-stats').innerHTML = statsTab(pokemon);
+// }
 
-function showAbilitiesTab(index){
-    let pokemon = allPokemon[index];
-    document.getElementById('nav-profile').innerHTML = abilitiesTab(pokemon);
-}
+// function showAbilitiesTab(index){
+//     let pokemon = allPokemon[index];
+//     document.getElementById('nav-profile').innerHTML = abilitiesTab(pokemon);
+// }
 
 function showEvolutionChainTab(evolutionDataArr, i){
     document.getElementById('nav-contact').innerHTML = '';

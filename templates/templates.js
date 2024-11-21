@@ -1,7 +1,7 @@
 function overviewTemplate(pokeIndex){
     let firstType = allPokemon[pokeIndex].type[0];
     let secType = allPokemon[pokeIndex].type[1];
-    return  `<div class="card m-4" onclick="getEvolutionData(${pokeIndex})" id="pokemon_${pokeIndex}">
+    return  `<div class="card m-4" id="pokemon_${pokeIndex}">
                 <div class="cardHeader text-capitalize p-2">${allPokemon[pokeIndex].Name}</div>
                 <div id="imgContainer" class="${firstType}">           
                     <img src="${allPokemon[pokeIndex].Img}" class="cardPokeImg mx-auto" alt="${allPokemon[pokeIndex].Name}" onclick="openOverlay(${pokeIndex})">
@@ -22,30 +22,37 @@ function overviewTemplate(pokeIndex){
 function statsTab(pokemon){ 
         return `
            <div class="progress-container">
-                <span>Base-HP:</span>
+                <span>Basis-HP:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[0].base_stat}" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: ${pokemon.stats[0].base_stat}%;"></div>
+                    <div class="progress-bar" style="width: ${pokemon.stats[0].base_stat}%;">${pokemon.stats[0].base_stat}</div>
                 </div>
             </div>
 
             <div class="progress-container">
-                <span>Attack:</span>
+                <span>Angriff:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[1].base_stat}" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: ${pokemon.stats[1].base_stat}%;"></div>
+                    <div class="progress-bar" style="width: ${pokemon.stats[1].base_stat}%;">${pokemon.stats[1].base_stat}</div>
                 </div>
             </div>
 
             <div class="progress-container">
-                <span>Defense:</span>
+                <span>Verteidigung:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[2].base_stat}" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: ${pokemon.stats[2].base_stat}%;"></div>
+                    <div class="progress-bar" style="width: ${pokemon.stats[2].base_stat}%;">${pokemon.stats[2].base_stat}</div>
                 </div>
             </div>
 
             <div class="progress-container">
-                <span>Special Attack:</span>
+                <span>Spezial Angriff:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[3].base_stat}" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: ${pokemon.stats[3].base_stat}%;"></div>
+                    <div class="progress-bar" style="width: ${pokemon.stats[3].base_stat}%;">${pokemon.stats[3].base_stat}</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <span>Geschwindigkeit:</span>
+                <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[4].base_stat}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: ${pokemon.stats[4].base_stat}%;">${pokemon.stats[4].base_stat}</div>
                 </div>
             </div> `
 }
@@ -75,8 +82,24 @@ function abilitiesTab(pokemon){
 }
 
 function aboutTab(pokemon){
+    let firstType = pokemon.type[0];
+    let secType  = pokemon.type[1];
     return `
-    <p>Spezies:</p>${pokemon.species}`;
+    <h2 class="text-capitalize pb-4">${pokemon.Name}</h2>
+    <table class="table">
+        <tr>
+            <th scope="row">Gewicht</th>
+            <td>${pokemon.weight} kg</td>
+        </tr>
+        <tr>
+            <th scope="row">Größe</th>
+            <td>${(pokemon.height / 10).toFixed(2)} m</td>
+        </tr>
+        <tr>
+            <th scope="row">Fähigkeiten</th>
+            <td class="text-capitalize">${firstType}${secType ? `, ${secType}` : ''}</td>
+        </tr>
+    `
 
 }
 

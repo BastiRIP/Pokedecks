@@ -1,5 +1,7 @@
 let DB_URL = "https://pokeapi.co/api/v2/";
 allPokemon = [];
+selectedPokemon = [];
+currentIndex = [];
 let offset = 0;
 let limit = 20;
 
@@ -14,6 +16,7 @@ async function loadAllPokemon(filter = ""){
     try {
         let response = await fetch(DB_URL + `/pokemon/?offset=${offset}&limit=${limit}`);
         let responseAsJson = await response.json();
+        
         for (let index = 0; index < responseAsJson.results.length; index++) {
             const pokeName = responseAsJson.results[index].name;
             const pokeUrl = responseAsJson.results[index].url;
@@ -30,38 +33,61 @@ async function loadAllPokemon(filter = ""){
     }
 }
 
+function openOverlay(pokeIndex){
+    let currentIndex = pokeIndex;
+    getSinglePokemon(pokeIndex);
+    let overlay = document.getElementById('overlay');
+    if (overlay.classList.contains('d-none')) {
+        getSinglePokemon(pokeIndex);
+        renderPokemonDetailCard(pokeIndex);
+        setTimeout(() => showAboutTab(pokeIndex), 50);
+        setTimeout(() => showStatsTab(pokeIndex), 50);
+    }
+    
+    overlay.classList.toggle('d-none');
+}
+
+async function getSinglePokemon(pokeIndex){
+    let response = await fetch(allPokemon[pokeIndex].url);
+    let pokemonDetails = await response.json();
+    console.log(pokemonDetails);
+    
+    let base = pokemonDetails.base_experience;
+    let pokeHeight = pokemonDetails.height;
+    let pokeWeight = pokemonDetails.weight;
+    let id = pokemonDetails.id;
+    let evolution = pokemonDetails.species.url;
+    let stats = pokemonDetails.stats;
+    updatePokemon(base, pokeHeight, pokeWeight, id, evolution, stats)
+}
+
+
+function updatePokemon(base, pokeHeight, pokeWeight, id, evolution, stats) {
+    let newData = {
+        "base": base,
+        "height": pokeHeight,
+        "weight": pokeWeight,
+        "evolution": evolution,
+        "stats" : stats
+    }
+    let pokeUpdate = allPokemon.find(pokemon => pokemon.ID === id);
+    if (pokeUpdate) {
+        Object.assign(pokeUpdate, newData);
+    }
+}
+
 function pushPokemonToArray(pokeName, pokeUrl, pokeId, pokeTypes, pokeImg){
     allPokemon.push(
         {
             "Name": pokeName,
             "ID" : pokeId,
             "url" : pokeUrl,
-            // "base" : base,
-            // "height" : pokeHeight,
-            // "weight" : pokeWeight,
             "type" : pokeTypes,
             "Img" : pokeImg
         }   
     )  
     renderPokemonsOverview();
 }
-
-async function getEvolutionData(pokeIndex){
-    try {
-        let response = await fetch(allPokemon[pokeIndex].url);
-        let responseEvolution = await response.json(); 
-        console.log(responseEvolution);
-    }
-    catch (error) {
-        console.error("irgendwas mit der Evolution klappt nicht")
-    }
-}
-
-
-// let base = pokemonDetails.base_experience;
-//             let pokeHeight = pokemonDetails.height;
-//             let pokeWeight = pokemonDetails.weight;
-
 
 function renderPokemonsOverview(){
     let allpokemon = allPokemon;
@@ -85,7 +111,6 @@ function searchPokemon() {
         renderPokemonsOverview();
         return;
     }
-
     if (searchWord.length > 2) {
         let searchedPoke = allPokemon.filter(poke => poke.Name && poke.Name.toLowerCase().includes(searchWord));
         viewSearchedPokemon(searchedPoke);
@@ -100,15 +125,6 @@ function viewSearchedPokemon(searchedPoke) {
     }
 }
 
-function openOverlay(pokeIndex){
-    currentIndex = pokeIndex;
-    let overlay = document.getElementById('overlay');
-    if (overlay.classList.contains('d-none')) {
-        renderPokemonDetailCard(pokeIndex);
-    }
-    overlay.classList.toggle('d-none');
-}
-
 function renderPokemonDetailCard(pokeIndex){
     bigCardImg(pokeIndex);
 }
@@ -118,5 +134,29 @@ function bigCardImg(index) {
     document.getElementById('bigCardImg').innerHTML = `
         <img class="bigCardImg" src="${pokemon.Img}" alt="${pokemon.name}">
     `;
+}
+
+function showAboutTab(pokeIndex){
+    let pokemon = allPokemon[pokeIndex];
+    document.getElementById('nav-about').innerHTML = aboutTab(pokemon);
+}
+
+function showStatsTab(pokeIndex){
+    let pokemon = allPokemon[pokeIndex];
+    document.getElementById('nav-stats').innerHTML = statsTab(pokemon);
+}
+
+function nextPokemon(){
+    if (currentIndex < allPokemon.length - 1){
+        currentIndex++;
+        renderPokemonDetailCard(currentIndex);
+    }
+}
+
+function prevPokemon(){
+    if (currentIndex > 0){
+        currentIndex--;
+        renderPokemonDetailCard(currentIndex);
+    }
 }
 
