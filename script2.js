@@ -37,10 +37,7 @@ function openOverlay(pokeIndex){
     currentIndex = pokeIndex;
     let overlay = document.getElementById('overlay');
     if (overlay.classList.contains('d-none')) {
-        getSinglePokemon(pokeIndex);
         renderPokemonDetailCard(pokeIndex);
-        setTimeout(() => showAboutTab(pokeIndex), 50);
-        setTimeout(() => showStatsTab(pokeIndex), 50);
     }
     
     overlay.classList.toggle('d-none');
@@ -125,6 +122,9 @@ function viewSearchedPokemon(searchedPoke) {
 
 function renderPokemonDetailCard(pokeIndex){
     bigCardImg(pokeIndex);
+    getSinglePokemon(pokeIndex);
+    setTimeout(() => showAboutTab(pokeIndex), 50);
+    setTimeout(() => showStatsTab(pokeIndex), 50);
 }
 
 function bigCardImg(index) {
