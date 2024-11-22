@@ -1,7 +1,7 @@
 let DB_URL = "https://pokeapi.co/api/v2/";
 allPokemon = [];
 selectedPokemon = [];
-currentIndex = [];
+currentIndex = null;
 let offset = 0;
 let limit = 20;
 
@@ -34,8 +34,7 @@ async function loadAllPokemon(filter = ""){
 }
 
 function openOverlay(pokeIndex){
-    let currentIndex = pokeIndex;
-    getSinglePokemon(pokeIndex);
+    currentIndex = pokeIndex;
     let overlay = document.getElementById('overlay');
     if (overlay.classList.contains('d-none')) {
         getSinglePokemon(pokeIndex);
@@ -50,7 +49,6 @@ function openOverlay(pokeIndex){
 async function getSinglePokemon(pokeIndex){
     let response = await fetch(allPokemon[pokeIndex].url);
     let pokemonDetails = await response.json();
-    console.log(pokemonDetails);
     
     let base = pokemonDetails.base_experience;
     let pokeHeight = pokemonDetails.height;
