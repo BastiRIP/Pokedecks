@@ -7,33 +7,31 @@
 
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="styles/pokemonOverview.css">
-
         <link rel="icon" type="image/png" href="img/favicon.png">
 
-
         <script src="templates/templates.js" defer></script>
-        <!-- <script src="script.js" defer></script> -->
         <script src="script2.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
-        <title>Pokedex</title>
+        <title>Pokedecks</title>
 
-        </head>
+    </head>
 
-    <body onload="init()">
-      <!-- <div class="spinner-wrapper" id="spinnerContainer">
+    <body id="body" class="" onload="init()">
+      <div class="spinner-wrapper d-none" id="spinnerContainer">
           <img src="img/Pokeball-PNG-Free-Download.png" id="spinnerImg" alt="spinner Pokeball">
           <p>...catchin´ Pokémon!</p>
-      </div> -->
+      </div>
         <header id="header">
             <nav class="navbar navbar-light bg-light fixed-top">
                 <div class="container-fluid">
-                  <a class="navbar-brand fs-1   color: $yellow-400">Pokedecks</a>
+                  <a class="navbar-brand fs-1"><img src="img/pokedex-logo.png" alt="pokedex-logo"></a>
+                  
                   <form class="d-flex">
                     <input class="form-control me-2" type="search" id ="search" placeholder="Suche Pokemon" aria-label="Search" oninput="searchPokemon()">
                   </form>
@@ -43,30 +41,27 @@
         <div id="content"></div>
         <div id="overlay" class="overlay d-none" onclick="openOverlay()">
             <div id="cardBig" onclick="event.stopPropagation()">
-                    <div class="pb-2" id="bigCardImg"></div>
+                    <div id="bigCardImg"></div>
                         <div id="test">
                             <nav>
                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                   <a class="nav-link active" id="nav-about-tab" data-bs-toggle="tab" href="#nav-about" role="tab" aria-controls="about-stats" aria-selected="true">Über</a>
                                   <a class="nav-link" id="nav-stats-tab" data-bs-toggle="tab" href="#nav-stats" role="tab" aria-controls="nav-stats" aria-selected="true">Stats</a>
-                                  <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Evolution</a>
+                                  <a class="nav-link" id="nav-evo-tab" data-bs-toggle="tab" href="#nav-evo" role="tab" aria-controls="nav-profile" aria-selected="false">Evolution</a>
                                 </div>
                             </nav>
                               <div class="tab-content m-4" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab"></div>
                                 <div class="tab-pane fade" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab"></div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"></div>
+                                <div class="tab-pane fade" id="nav-evo" role="tabpanel" aria-labelledby="nav-evo-tab"><div id="evoTab"></div></div>
                               </div>
-                              
                         </div>
-                        <div id="navigation" class="d-flex justify-content-around pt-3">
+                        <div id="navigation" class="d-flex justify-content-around pt-3 pb-2">
                           <img class="navArrow" src="img/arrow_prev.png" alt="arrowPrevPokemon" onclick="prevPokemon()">
                           <img class="navArrow" src="img/arrow_next.png" alt="arrowNextPokemon" onclick="nextPokemon()">
                         </div>
                     </div>
-                    
             </div>
-            
         </div>
         <footer id="footer">
             <div class="d-grid gap-2 col-6 mx-auto pb-3">

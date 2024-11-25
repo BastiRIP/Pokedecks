@@ -15,10 +15,10 @@ async function init(){
 
 
 async function loadAllPokemon(filter = ""){
+    document.getElementById('spinnerContainer').classList.remove('d-none');
     try {
         let response = await fetch(DB_URL + `/pokemon/?offset=${offset}&limit=${limit}`);
         let responseAsJson = await response.json();
-        
         for (let index = 0; index < responseAsJson.results.length; index++) {
             const pokeName = responseAsJson.results[index].name;
             const pokeUrl = responseAsJson.results[index].url;
@@ -33,15 +33,17 @@ async function loadAllPokemon(filter = ""){
     catch (error) {
         console.error("das hat nicht geklappt");
     }
+    document.getElementById('spinnerContainer').classList.add('d-none');
 }
 
 function openOverlay(pokeIndex){
     currentIndex = pokeIndex;
+    let body = document.getElementById('body');
     let overlay = document.getElementById('overlay');
     if (overlay.classList.contains('d-none')) {
         renderPokemonDetailCard(pokeIndex);
     }
-    
+    body.classList.toggle('overflowHidden');
     overlay.classList.toggle('d-none');
 }
 
@@ -164,9 +166,9 @@ function prevPokemon(){
 }
 
 function showEvolutionChainTab(evolutionDataArr, i){
-    document.getElementById('nav-contact').innerHTML = '';
+    document.getElementById('evoTab').innerHTML = '';
     for (let i = 0; i < evolutionDataArr.length; i++) {
-        document.getElementById('nav-contact').innerHTML += evolutionChainTab(evolutionDataArr, i);   
+        document.getElementById('evoTab').innerHTML += evolutionChainTab(evolutionDataArr, i);   
     }    
 }
 
@@ -176,22 +178,18 @@ async function getEvolutionData(url){
     let evoData = data.evolution_chain.url;
     let getDataChain = await fetch(evoData);
     let dataChain = await getDataChain.json();
-    console.log(dataChain);
+    let dataChainEvo = dataChain.chain;
     const evolutionDataArr = [];
-
-    
-        
-        function extractEvolutionDetails(dataChain) {
-            const pokemonName = dataChain.chain.species.name;
-            const pokemonId = dataChain.chain.species.url.split('/').slice(-2, -1)[0];
-            const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
-          
+        function extractEvolutionDetails(dataChainEvo) {
+            let pokemonName = dataChainEvo.species.name;
+            let pokemonId = dataChainEvo.species.url.split('/').slice(-2, -1)[0];
+            let pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
             evolutionDataArr.push({ name: pokemonName, imageUrl: pokemonImageUrl });
-            chainLink.evolves_to.forEach(nextEvolution => extractEvolutionDetails(nextEvolution));
-        }
-        extractEvolutionDetails(Datachain);
-            const pokemonEvolution = evolutionDataArr[i];
-            showEvolutionChainTab(evolutionDataArr);     
-    console.log(evolutionDataArr);
+                if (dataChainEvo.evolves_to && dataChain.chain.evolves_to.length > 0) {
+                    dataChainEvo.evolves_to.forEach(nextEvolution => extractEvolutionDetails(nextEvolution));
+                }
+    }
+    extractEvolutionDetails(dataChainEvo);
+    showEvolutionChainTab(evolutionDataArr);     
 }
 
