@@ -63,7 +63,7 @@
     padding: 8px;
 }
 
-#test{
+#statsPage{
     height: 60%;
     border-radius: 19px;
     background-color: white;;
@@ -186,7 +186,7 @@
         width: 60px;
     }
 
-    #test {
+    #statsPage {
         height: 53%;
     }
 
@@ -197,10 +197,18 @@
     .bigCardImg {
         height: 180px;
     }
+
+    #nav-tabContent.tab-content.m-3{
+        margin: 5px !important;
+    }
 }
 
 @media(max-width: 400px){
     .container-fluid{
         justify-content: center !important;
     }
+}
+
+.footer img{
+    width: 100px;
 }

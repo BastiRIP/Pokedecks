@@ -41,7 +41,7 @@
         <div id="overlay" class="overlay d-none" onclick="openOverlay()">
             <div id="cardBig" onclick="event.stopPropagation()">
                     <div id="bigCardImg"></div>
-                        <div id="test">
+                        <div id="statsPage">
                             <nav>
                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                   <a class="nav-link active" id="nav-about-tab" data-bs-toggle="tab" href="#nav-about" role="tab" aria-controls="about-stats" aria-selected="true">Über</a>
@@ -49,7 +49,7 @@
                                   <a class="nav-link" id="nav-evo-tab" data-bs-toggle="tab" href="#nav-evo" role="tab" aria-controls="nav-profile" aria-selected="false">Evolution</a>
                                 </div>
                             </nav>
-                              <div class="tab-content m-4" id="nav-tabContent">
+                              <div class="tab-content m-3" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab"></div>
                                 <div class="tab-pane fade" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab"></div>
                                 <div class="tab-pane fade" id="nav-evo" role="tabpanel" aria-labelledby="nav-evo-tab"><div id="evoTab"></div></div>
@@ -66,6 +66,9 @@
             <div class="d-grid gap-2 col-6 mx-auto pb-3">
                 <button class="btn btn-primary" type="button" onclick="loadMorePokemon()">load more Pokémon</button>
               </div>
+        </footer>
+        <footer>
+          <div class="footer d-flex justify-content-center align-items-center"><img src="img/pokedex-logo.png" alt="pokedex-logo"> by Bastian Geppert</div>
         </footer>
     </body>
 </html>
