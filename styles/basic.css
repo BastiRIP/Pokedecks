@@ -1,0 +1,73 @@
+.faculty-glyphic-regular {
+    font-family: "Faculty Glyphic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.geist-mono {
+    font-family: "Geist Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+html{
+    max-width: 1920px;
+    font-family: 'Roboto';
+}
+
+.edge {
+    background-color: rgb(236, 222, 222);
+}
+
+.grass{
+    background-color: #81C784;
+}
+
+.fire{
+    background-color: #FF7F5E;
+}
+
+.water{
+    background-color: #64B3FF;
+}
+
+.bug{
+    background-color: #B0C04E;
+}
+
+.normal{
+    background-color: #F66C6D;
+}
+
+.poison{
+    background-color: #A065FC;
+}
+
+.electric{
+    background-color: #FFD700;
+}
+
+.ground{
+    background-color: #C2A18C;
+}
+
+.fairy{
+    background-color: #FFC8C8;
+}
+
+.fighting{
+    background-color: #C74040;
+}
+
+.psychic{
+    background-color: #F48FB3;
+}
+
+.rock{
+    background-color: #8C8B8A;
+}
+
+.ghost{
+    background-color: #8180BE;
+}

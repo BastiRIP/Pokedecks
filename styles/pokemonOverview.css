@@ -39,7 +39,8 @@
 .typeImg{
     height: 43px !important;
     width: 43px !important;
-} 
+}
+
 .typeContainer{
     display: flex;
     flex-direction: column-reverse;

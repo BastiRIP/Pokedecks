@@ -1,9 +1,9 @@
 function overviewTemplate(pokeIndex){
     let firstType = allPokemon[pokeIndex].type[0];
     let secType = allPokemon[pokeIndex].type[1];
-    return  `<div class="card m-4" id="pokemon_${pokeIndex}">
-                <div class="cardHeader text-capitalize p-2">${allPokemon[pokeIndex].Name}</div>
-                <div id="imgContainer" class="${firstType}">           
+    return  `   <div class="card m-4" id="pokemon_${pokeIndex}">
+                    <div class="cardHeader text-capitalize p-2">${allPokemon[pokeIndex].Name}</div>
+                    <div id="imgContainer" class="${firstType}">           
                     <img src="${allPokemon[pokeIndex].Img}" class="cardPokeImg mx-auto" alt="${allPokemon[pokeIndex].Name}" onclick="openOverlay(${pokeIndex})">
                 </div>
                 <div class="cardFooter p-4">
@@ -16,7 +16,7 @@ function overviewTemplate(pokeIndex){
                             <div class="text-capitalize" id="secType">${secType}</div>
                             <img class="typeImg" src="img/typesImg/${secType}.png" alt="${secType}">
                         </div>` : ''}
-            </div>`
+                </div>`
 }
 
 function statsTab(pokemon){ 
@@ -27,28 +27,24 @@ function statsTab(pokemon){
                     <div class="progress-bar" style="width: ${pokemon.stats[0].base_stat}%;">${pokemon.stats[0].base_stat}</div>
                 </div>
             </div>
-
             <div class="progress-container">
                 <span>Angriff:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[1].base_stat}" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar" style="width: ${pokemon.stats[1].base_stat}%;">${pokemon.stats[1].base_stat}</div>
                 </div>
             </div>
-
             <div class="progress-container">
                 <span>Verteidigung:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[2].base_stat}" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar" style="width: ${pokemon.stats[2].base_stat}%;">${pokemon.stats[2].base_stat}</div>
                 </div>
             </div>
-
             <div class="progress-container">
                 <span>Spezial Angriff:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[3].base_stat}" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar" style="width: ${pokemon.stats[3].base_stat}%;">${pokemon.stats[3].base_stat}</div>
                 </div>
             </div>
-
             <div class="progress-container">
                 <span>Geschwindigkeit:</span>
                 <div class="progress" role="progressbar" aria-valuenow="${pokemon.stats[4].base_stat}" aria-valuemin="0" aria-valuemax="100">
